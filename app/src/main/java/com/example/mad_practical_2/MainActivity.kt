@@ -12,22 +12,28 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val myName: MyName = MyName("Lim Zhi Xuan")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.doneButton.setOnClickListener {
             addNickname(it)
         }
 
-        binding.nicknameText.setOnClickListener {
+        /*binding.nicknameText.setOnClickListener {
             updateNickname(it)
-        }
+        }*/
+
+        binding.myName = myName
     }
 
     private fun addNickname(view: View) {
         binding.apply {
-            nicknameText.text = nicknameEdit.text.toString()
+            myName?.nickname = nicknameEdit.text.toString()
+            invalidateAll()
             nicknameEdit.visibility = View.GONE
             doneButton.visibility = View.GONE
             nicknameText.visibility = View.VISIBLE
@@ -38,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    private fun updateNickname (view: View) {
+    /*private fun updateNickname (view: View) {
         binding.apply {
             nicknameEdit.visibility = View.VISIBLE
             doneButton.visibility = View.VISIBLE
@@ -51,5 +57,5 @@ class MainActivity : AppCompatActivity() {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(nicknameEdit, 0)
         }
-    }
+    }*/
 }
